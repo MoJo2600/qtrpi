@@ -41,6 +41,10 @@ sudo chroot sysroot-full /bin/bash -c 'apt-get install -y apt-transport-https'
 sudo chroot sysroot-full /bin/bash -c 'apt-get build-dep -y qt4-x11 qtbase-opensource-src'
 sudo chroot sysroot-full /bin/bash -c 'apt-get install -y libudev-dev libinput-dev libts-dev libxcb-xinerama0-dev libxcb-xinerama0 libraspberrypi-dev'
 
+# welle.io requirements
+sudo chroot sysroot-full /bin/bash -c 'apt-get install -y libbluetooth-dev bluez-tools gstreamer1.0-plugins* libgstreamer1.0-dev libgstreamer-plugins-base1.0-dev libopenal-data libsndio7.0 libopenal1 libopenal-dev pulseaudio libopenal-dev'
+sudo chroot sysroot-full /bin/bash -c 'apt-get install -y libmp3lame-dev libsoapysdr-dev libmpg123-dev libfaad-dev libfftw3-dev librtlsdr-dev libairspy-dev libusb-1.0-0-dev mesa-common-dev libglu1-mesa-dev libpulse-dev rtl-sdr'
+
 sudo umount sysroot-full/sys
 sudo umount sysroot-full/dev
 sudo umount sysroot-full/proc

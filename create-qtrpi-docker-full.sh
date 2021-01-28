@@ -34,19 +34,15 @@ if [[ $DISPLAY_HELP ]]; then
     exit 0
 fi
 
-RASPBIAN_ARG=''
-if [[ $NO_QUESTIONS ]]; then
-    RASPBIAN_ARG='--no-download'
-fi
-
 check_env_vars
 
 cd utils
-./init-common.sh
-./synchronize-toolchain.sh
-./download-raspbian.sh $RASPBIAN_ARG
-./prepare-sysroot-full.sh
-./prepare-sysroot-minimal.sh
-./switch-sysroot.sh full
-#./synchronize-qt-modules.sh
-#./compile-qt-modules.sh --clean-output --clean-modules-repo
+./generate-compressed-qtrpi.sh
+./generate-compressed-sysroot-full.sh
+
+cd ..
+mkdir -p dist/
+cp /opt/qtrpi/dist/qtrpi/rpi3/*.tar.gz dist/
+cp /opt/qtrpi/dist/sysroot/*.tar.gz dist/
+
+docker build -t qtrpi/qt5.12.9 . -f docker/rpi3/qt5.12.9-full/Dockerfile

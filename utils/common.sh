@@ -65,7 +65,6 @@ check_env_vars() {
     validate_var_qtrpi_qt_version
     validate_var_qtrpi_target_device
     validate_var_qtrpi_target_host
-    
 }
 
 
@@ -150,3 +149,19 @@ function download_qtrpi_binaries() {
     fi
 }
 
+function deploy_sysroot() {
+    message "path $PWD"
+    INSTALL=${1:-true}
+    message "Switching sysroot"
+    if [[ "$INSTALL" = true ]]; then
+        $UTILS_DIR/switch-sysroot.sh full
+    fi
+}
+
+function deploy_qtrpi_binaries() {
+    INSTALL=${1:-true}
+    message "Linking local qtrpi binaries"
+    if [[ "$INSTALL" = true ]]; then
+        ln -sf $ROOT/raspi/qt5/bin/qmake $ROOT/bin/qmake-qtrpi
+    fi
+}

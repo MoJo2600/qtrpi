@@ -19,8 +19,7 @@ else
     # umount is not allowed in a docker image, besides we use a fresh linux image => skipping sanity checks
     # sudo is also not needed/installed by default => creating directory structure without use of sudo
     mkdir -p $ROOT
-    GROUP=$(id -g -n)
-    chown -R $USER:$GROUP $ROOT
+    chown -R $USER:$USER $ROOT
 fi
 
 cd_root
